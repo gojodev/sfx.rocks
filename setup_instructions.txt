@@ -1,0 +1,8 @@
+1. apt-get install apache2 php
+2. vim /etc/apache2/sites-available/000-default.conf
+   Add the following lines to the end:
+   <Directory /var/www/html>
+     AllowOverride All
+   </Directory>
+3. a2enmod rewrite
+4. systemctl restart apache2

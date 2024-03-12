@@ -1,0 +1,6 @@
+RewriteEngine On
+
+RedirectMatch 404 /\.git
+
+RewriteRule ^$ index.php [END,L]
+RewriteRule ^([a-zA-Z-0-9]+)$ sounds.php?sound=$1 [END,L]
