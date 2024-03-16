@@ -1,0 +1,160 @@
+* {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.1rem;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/*
+todo: remove the following classes from caopoints
+title, 
+*/
+
+:root {
+    --black: black;
+    --primary: #0080ff;
+    --bg-color: black;
+    --accent: orange;
+    --white: white;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    align-items: center;
+    width: 100%;
+    color: var(--black);
+    background-color: var(--bg-color);
+    overflow-x: hidden;
+}
+
+
+.header {
+    margin: 10px;
+    padding: 10px;
+    color: var(--black);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--bg-color);
+}
+
+.fadeIn {
+    animation: fadeInAni;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+}
+
+@keyframes fadeInAni {
+    from {
+        opacity: 0;
+        transform: translate(0, -15px);
+        transform: scale(1.05);
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.logo-container {
+    display: flex;
+    padding: 13px;
+    margin: auto;
+    border-radius: 15px;
+    background-color: var(--white);
+    align-items: center;
+    text-align: center;
+}
+
+.logo {
+    margin: 13px;
+    text-align: center;
+    width: 120px;
+    height: 120px;
+}
+
+#img-float {
+    transition: 0.3s;
+    float: left;
+}
+
+#img-float:hover {
+    transform: scale(1.05);
+}
+
+.nav-options {
+    margin: auto;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.right {
+    float: right;
+}
+
+.nav-link {
+    margin: auto;
+    padding: 8px;
+    text-decoration: none;
+    text-align: center;
+    color: var(--white);
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    transform: scale(1.05);
+}
+
+.selected {
+    color: var(--accent);
+    transition: 0.2s;
+}
+
+.special-background {
+    background-color: var(--black);
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.pulseAnimation {
+    opacity: 1;
+    animation-name: pulseAni;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    transition: 0.2s;
+}
+
+@keyframes pulseAni {
+    from {
+        opacity: 0.5;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.white {
+    color: var(--white);
+}
+
+.black {
+    color: var(--black);
+}
+
+.white-bg {
+    background-color: var(--white);
+}
+
+#main {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding: 50px;
+    border-radius: 20px;
+}
