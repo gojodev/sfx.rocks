@@ -1,20 +1,28 @@
-function getFiles() {
-    // todo: access sounds and images from firebase
-    const { initializeApp, cert } = require('firebase-admin/app');
-    const { getStorage } = require('firebase-admin/storage');
-    var serviceAccount = require("serviceAccountKey.json");
+import { config } from "./firebase.config";
+config();
 
-    admin.initializeApp({
-        credential: admin.credential.cert(serviceAccount),
-        storageBucket: '<BUCKET_NAME>.appspot.com'
-    });
+async function getCategory() {
+    console.log("getting files...");
+    const storage = getStorage();
+
+    const ref_text = ref(storage, 'category.json');
+    const text_url = await getDownloadURL(ref_text);
+    const response = await fetch(text_url, { mode: 'cors' });
+    let text = await response.text();
+    text = JSON.parse(text);
+    console.log(text);
+    // return text;
 }
 
-getFiles();
+
+// todo: access sounds and images from firebase
+async function getSoundsAndImages() {
+
+}
 
 function search() {
     const Fuse = require("fuse.js");
-    // ! all_sounds.json will be replaced with an online databases
+    // ! all_sounds.json will be replaced with a link to a .json file online
     const fuse = new Fuse(all_sounds, {
         keys: ['name', 'id', 'category']
     });

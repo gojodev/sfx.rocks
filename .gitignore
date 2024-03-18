@@ -67,4 +67,6 @@ node_modules/
 
 # ignore shit 💀
 .git
-serviceAccount.json
+firebase.config.js
+cors.json
+resources.txt
