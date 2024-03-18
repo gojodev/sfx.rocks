@@ -1,4 +1,6 @@
 import { config } from "./firebase.config";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
+
 config();
 
 async function getCategory() {
@@ -11,8 +13,12 @@ async function getCategory() {
     let text = await response.text();
     text = JSON.parse(text);
     console.log(text);
+    console.log("done");
+
     // return text;
 }
+
+getCategory();
 
 
 // todo: access sounds and images from firebase
