@@ -67,5 +67,5 @@ function submit() {
 
 // todo: generate show all the sounds and their images
 function show_sounds() {
-
+    // loop through all media and sounds
 }
