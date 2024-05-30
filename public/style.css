@@ -5,29 +5,22 @@
     font-weight: bold;
 }
 
-/*
-todo: remove the following classes from caopoints
-title, 
-*/
-
 :root {
     --black: black;
-    --primary: #0080ff;
-    --bg-color: black;
-    --accent: orange;
     --white: white;
+    --accent: #0080ff;
 }
 
 html {
     scroll-behavior: smooth;
 }
 
-
 body {
     align-items: center;
+    min-width: 330px;
     width: 100%;
     color: var(--black);
-    background-color: var(--bg-color);
+    background-color: var(--white);
     overflow-x: hidden;
 }
 
@@ -35,11 +28,11 @@ body {
 .header {
     margin: 10px;
     padding: 10px;
-    color: var(--black);
+    color: var(--white);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--bg-color);
+    background-color: var(--white);
 }
 
 .fadeIn {
@@ -116,9 +109,11 @@ body {
 }
 
 .special-background {
-    background-color: var(--black);
+    background-color: var(--white);
+    color: black;
     padding: 10px;
     border-radius: 20px;
+    box-shadow: 10px 10px 5px #aaaaaa;
 }
 
 .pulseAnimation {
@@ -151,10 +146,89 @@ body {
     background-color: var(--white);
 }
 
+.black-bg {
+    background-color: var(--black);
+}
+
 #main {
     width: 80%;
     margin: auto;
     text-align: center;
     padding: 50px;
     border-radius: 20px;
+}
+
+.footer {
+    text-align: center;
+    background-color: var(--accent);
+    color: var(--black);
+    font-size: 14px;
+    padding: 10px;
+    width: 30%;
+    border-radius: 20px;
+    margin: auto;
+    transition: 0.2s;
+}
+
+.footer:hover {
+    font-size: 16px;
+    color: var(--white);
+    background-color: var(--black);
+    transition: 0.2s;
+}
+
+.search-bar {
+    align-items: center;
+    text-align: center;
+    display: table;
+    margin: 0 auto;
+    transition: 0.2s;
+}
+
+.search-bar:hover {
+    transform: scale(1.05);
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: var(--black);
+}
+
+::placeholder {
+    color: var(--white);
+    opacity: 0.85;
+}
+
+input,
+select {
+    padding: 10px;
+    font-weight: bold;
+    border-bottom: 1px solid var(--white);
+    border-top-left-radius: 20px;
+    background-color: var(--black);
+    color: var(--white);
+    margin-top: 5px;
+    transition: border, color 0.3s;
+    transition: 0.3s;
+}
+
+input:hover,
+select:hover {
+    border-bottom-left-radius: 20px;
+
+}
+
+input:focus,
+select:focus {
+    border-bottom-left-radius: 20px;
+    border-color: var(--accent);
+}
+
+/* removes the up and down arrows from the numebr input */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
