@@ -20,6 +20,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- font awesome  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -27,13 +32,13 @@
     <div class="logo-container">
       <div id="img-float">
         <a href="https://gojodev.com" alt="gojodev home page" target="_blank">
-          <img src="images/sfx_rocks.webp" alt="sfx rocks image" class="logo" id="gojodev">
+          <img src="images/logo.webp" alt="sfx rocks Logo" class="logo" id="gojodev">
         </a>
       </div>
 
       <div class="nav-options right">
         <a href="index.html">
-          <div class="nav-link selected special-background pulseAnimation">
+          <div class="nav-link special-background pulseAnimation">
             <h3 class="selected">Home</h3>
           </div>
         </a>
@@ -49,9 +54,28 @@
     </div>
   </div>
 
-  <div class="white-bg black" id="main">
+  <div class="search-bar">
+    <label for="target_text"></label>
+    <input type="text" id="target_text" placeholder="vine boom">
+
+    <i class="fas fa-search" style="color: #0080ff;float: left;"></i>
+  </div>
+
+  <br>
+  <div class="black-bg white" id="main">
     [will show images here]
   </div>
+
+  <br>
+  <div id="categories">
+    
+  </div>
+
+  <br>
+  <footer class="footer">
+    <h3>© GojoDev <strong id="year"></strong> </h3>
+  </footer>
+
   <script async type="module" src="./bundle.js"></script>
 </body>
 
