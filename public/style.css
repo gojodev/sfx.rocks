@@ -68,6 +68,9 @@ body {
     text-align: center;
     width: 120px;
     height: 120px;
+
+    object-fit: cover;
+    object-position: center;
 }
 
 #img-float {
@@ -113,7 +116,6 @@ body {
     color: black;
     padding: 10px;
     border-radius: 20px;
-    box-shadow: 10px 10px 5px #aaaaaa;
 }
 
 .pulseAnimation {
@@ -199,6 +201,10 @@ label {
 ::placeholder {
     color: var(--white);
     opacity: 0.85;
+}
+
+.box-shadow {
+    box-shadow: 10px 10px 5px #aaaaaa;
 }
 
 input,

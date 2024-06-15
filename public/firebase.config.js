@@ -1,1 +1,20 @@
-(function (_0x2d79e3, _0x4ae27f) { const _0xf12256 = _0x490f, _0x3da9e0 = _0x2d79e3(); while (!![]) { try { const _0x465f8d = parseInt(_0xf12256(0x69)) / 0x1 + -parseInt(_0xf12256(0x72)) / 0x2 * (-parseInt(_0xf12256(0x6b)) / 0x3) + -parseInt(_0xf12256(0x71)) / 0x4 + parseInt(_0xf12256(0x6d)) / 0x5 + -parseInt(_0xf12256(0x74)) / 0x6 * (parseInt(_0xf12256(0x6e)) / 0x7) + parseInt(_0xf12256(0x6c)) / 0x8 + parseInt(_0xf12256(0x6f)) / 0x9; if (_0x465f8d === _0x4ae27f) break; else _0x3da9e0['push'](_0x3da9e0['shift']()); } catch (_0x21557d) { _0x3da9e0['push'](_0x3da9e0['shift']()); } } }(_0x5927, 0x6275b)); function _0x490f(_0x5c5470, _0x7e6a98) { const _0x5927ca = _0x5927(); return _0x490f = function (_0x490f2e, _0x22f8a0) { _0x490f2e = _0x490f2e - 0x68; let _0x3b9999 = _0x5927ca[_0x490f2e]; return _0x3b9999; }, _0x490f(_0x5c5470, _0x7e6a98); } function _0x5927() { const _0x3fb8cd = ['sfx-rocks.firebaseapp.com', '13251ftekfz', '2338880yHUaOi', '1127690keicTQ', '889unDoAf', '2683692wySDbc', 'sfx-rocks.appspot.com', '3008260BlXGNo', '194IzAbdZ', 'sfx-rocks', '29658TAOxJg', '1:221320269920:web:0804ed9dfe08c466677305', '221320269920', '538582xlQvLw']; _0x5927 = function () { return _0x3fb8cd; }; return _0x5927(); } import { initializeApp } from 'firebase/app'; export function config() { const _0x2fbb70 = _0x490f, _0x4732f9 = { 'apiKey': 'AIzaSyA77HYtVdsJD_SdwDgdVWvGDeDA1IIquKY', 'authDomain': _0x2fbb70(0x6a), 'projectId': _0x2fbb70(0x73), 'storageBucket': _0x2fbb70(0x70), 'messagingSenderId': _0x2fbb70(0x68), 'appId': _0x2fbb70(0x75), 'measurementId': 'G-V506HKS3NE' }, _0x522a74 = initializeApp(_0x4732f9); }
+// ? https://firebase.google.com/docs/projects/learn-more#:~:text=The%20content%20of%20the%20Firebase,and%20Cloud%20Storage%20bucket%20name.
+// there is no harm in showing my API key and other creditionals as long as 
+
+import { initializeApp } from "firebase/app";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyA77HYtVdsJD_SdwDgdVWvGDeDA1IIquKY",
+  authDomain: "sfx-rocks.firebaseapp.com",
+  projectId: "sfx-rocks",
+  storageBucket: "sfx-rocks.appspot.com",
+  messagingSenderId: "221320269920",
+  appId: "1:221320269920:web:0804ed9dfe08c466677305",
+  measurementId: "G-V506HKS3NE"
+};
+
+export function config() {
+    initializeApp(firebaseConfig);
+}
+
+// ! update your firebase rules
