@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "@google-cloud/storage": "^7.8.0",
+    "es6": "^0.0.7",
     "events": "^3.3.0",
     "firebase": "^10.9.0",
     "firebase-admin": "^12.0.0",
@@ -17,11 +18,14 @@
     "fs": "^0.0.1-security",
     "fuse.js": "^7.0.0",
     "http": "^0.0.1-security",
-    "https": "^1.0.0"
+    "https": "^1.0.0",
+    "npx": "^10.2.2"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.1.0",
+    "@eslint/js": "^9.4.0",
     "esbuild": "0.20.2",
-    "eslint": "^8.57.0",
-    "eslint-config-google": "^0.14.0"
+    "eslint-config-google": "^0.14.0",
+    "globals": "^15.3.0"
   }
 }
