@@ -1,7 +1,10 @@
-// ? https://firebase.google.com/docs/projects/learn-more#:~:text=The%20content%20of%20the%20Firebase,and%20Cloud%20Storage%20bucket%20name.
-// there is no harm in showing my API key and other creditionals as long as 
+// ? https://firebase.google.com/docs/projects/learn-more#:~:text=The%20content%20of%20the%20Firebase,and%20Cloud%20Storage%20bucket%20name. 
+/**
+ * there is no harm in showing my API key and other creditionals
+ * because there are security rules that stop others from malicously using them
+ */
 
-import { initializeApp } from "firebase/app";
+import { initializeApp } from "firebase"; 
 
 const firebaseConfig = {
   apiKey: "AIzaSyA77HYtVdsJD_SdwDgdVWvGDeDA1IIquKY",
@@ -14,7 +17,7 @@ const firebaseConfig = {
 };
 
 export function config() {
-    initializeApp(firebaseConfig);
+  initializeApp(firebaseConfig);
 }
 
 // ! update your firebase rules
