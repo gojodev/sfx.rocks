@@ -1891,7 +1891,7 @@
   var version2 = "10.12.2";
   registerVersion(name2, version2, "app");
 
-  // public/firebase.config.js
+  // public/config.js
   var firebaseConfig = {
     apiKey: "AIzaSyA77HYtVdsJD_SdwDgdVWvGDeDA1IIquKY",
     authDomain: "sfx-rocks.firebaseapp.com",

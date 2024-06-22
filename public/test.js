@@ -1,48 +1,53 @@
-import { config } from "./firebase.config.js";
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import puppeteer from 'puppeteer';
 
-config();
 
-function newEntry(given_name, given_id, given_category) {
-    return { name: `${given_name}`, id: `${given_id}`, category: `${given_category}` }
-}
+function imageScrape(queries) {
+    (async () => {
+        try {
+            const browser = await puppeteer.launch({ headless: true });
+            const page = await browser.newPage();
 
-async function getCategory() {
-    const storage = getStorage();
-    const ref_text = ref(storage, 'category.json');
-    const text_url = await getDownloadURL(ref_text);
-    const response = await fetch(text_url, { mode: 'cors' });
-    let text = await response.text();
-    text = JSON.parse(text);
-    return text;
-}
+            for (const query of queries) {
+                await page.goto(`https://www.google.com/search?tbm=isch&q=${query}`);
 
-function addSFX(given_name, given_id, given_category) {
-    const data = getCategory()
-    console.log(data)
-    const jsonData = JSON.parse(data)
+                // Scroll to the bottom of the page to load more images
+                await page.evaluate(async () => {
+                    for (let i = 0; i < 10; i++) {
+                        window.scrollBy(0, window.innerHeight);
+                        await new Promise(resolve => setTimeout(resolve, 500)); // Wait for more images to load
+                    }
+                });
 
-    let given_data = { name: `${given_name}`, id: `${given_id}`, category: `${given_category}` };
+                // Wait for images to be loaded
+                await page.waitForSelector('img');
 
-    let duplicate = false;
-    for (let i = 0; i < jsonData.length; i++) {
-        let obj = jsonData[i];
+                // Extract image URLs
+                const images = await page.evaluate(() => {
+                    const imageElements = document.querySelectorAll('img');
+                    const urls = [];
+                    imageElements.forEach(img => {
+                        const url = img.src;
+                        if (url.startsWith('http') && !url.includes('google')) {
+                            urls.push(url);
+                        }
+                    });
+                    return urls.slice(0, 3); // Limit to first 3 image URLs
+                });
 
-        if (given_data.id == obj.id) {
-            duplicate = true
-            break;
+                console.log(`\nResults for query: ${query}`);
+                images.forEach((url, index) => {
+                    console.log(`Image ${index + 1}: ${url}`);
+                });
+            }
+
+            await browser.close();
+
+        } catch (err) {
+            console.error('An error occurred:', err);
         }
-    }
-
-    if (duplicate == false) {
-        jsonData.push(given_data)
-        const jsonString = JSON.stringify(jsonData)
-        fs.writeFileSync('category.json', jsonString, 'utf-8')
-        console.log("new item added")
-        return jsonData
-    }
-    else {
-        console.log("duplicate found");
-        return {}
-    }
+    })();
 }
+
+imageScrape(['python programming language logo'])
+
+// sounds.json has more items than cateogory.json

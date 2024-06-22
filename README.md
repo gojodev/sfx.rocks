@@ -566,7 +566,7 @@ sfx.rocks
 │  ├─ 404.html
 │  ├─ bundle.js
 │  ├─ category.json
-│  ├─ firebase.config.js
+│  ├─ config.js
 │  ├─ home.js
 │  ├─ images
 │  │  ├─ emmanuel.webp
@@ -596,7 +596,7 @@ sfx.rocks
 │  ├─ 404.html
 │  ├─ bundle.js
 │  ├─ category.json
-│  ├─ firebase.config.js
+│  ├─ config.js
 │  ├─ home.js
 │  ├─ images
 │  │  ├─ emmanuel.webp

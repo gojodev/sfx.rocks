@@ -1,6 +1,5 @@
-import { config } from "./firebase.config.js";
-import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
-import { getAuth } from "firebase/auth";
+import { config } from "./config.js";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
 config();
 
@@ -38,47 +37,12 @@ async function getCategory() {
     return text; // returns an array of the JSON data
 }
 
-async function addSFX(given_name, given_id, given_category) {
-    const dataPromise = Promise.resolve(getCategory());
-
-    dataPromise.then((dataPromise) => {
-        let data = JSON.parse(JSON.stringify(dataPromise))
-        let given_data = { name: `${given_name}`, id: `${given_id}`, category: `${given_category}` };
-
-        let duplicate = false;
-        for (let i = 0; i < data.length; i++) {
-            let obj = data[i];
-
-            if (given_data.id == obj.id) {
-                duplicate = true
-                break;
-            }
-        }
-
-        if (duplicate == false) {
-            data.push(given_data)
-            console.log(data)
-            let test;
-
-            // todo upload updated JSON to firebase storage
-            uploadBytes(testCatRef, data);
-        }
-        else {
-            console.log(`Didn't add : ${JSON.stringify(given_data)} \nas ID: "${given_data.id}" already exists`)
-        }
-    })
-}
-
-addSFX('test', 'test', 'test')
-// addSFX('Eat', 'eat', 'Minecraft')
-
-
 function search(query) {
     let Fuse = require("fuse.js");
 
     let all_sounds = []
     let fuse = new Fuse(all_sounds, {
-        keys: ['name', 'id', 'category']
+        keys: ['name', 'id', 'category', 'img']
     });
 
     let output = fuse.search(query);

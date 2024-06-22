@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "scripts": {
     "build": "node ./esbuild.config.js"
   },
@@ -12,14 +13,17 @@
     "@google-cloud/storage": "^7.8.0",
     "es6": "^0.0.7",
     "events": "^3.3.0",
-    "firebase": "^10.9.0",
+    "firebase": "^10.12.2",
     "firebase-admin": "^12.0.0",
     "firebase-tools": "^13.5.1",
     "fs": "^0.0.1-security",
     "fuse.js": "^7.0.0",
     "http": "^0.0.1-security",
     "https": "^1.0.0",
-    "npx": "^10.2.2"
+    "images-scraper": "^6.4.6",
+    "npx": "^3.0.0",
+    "puppeteer": "^22.12.0",
+    "puppeteer-core": "^22.12.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.1.0",
