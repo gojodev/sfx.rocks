@@ -25,7 +25,7 @@ function gojodev() {
 
 gojodev()
 
-// ! global
+// ! global ------------------------------------------------
 const storage = getStorage();
 const categoryRef = ref(storage, 'category.json');
 const testCatRef = ref(storage, 'testCat.json');
@@ -47,4 +47,13 @@ function search(query) {
 
     let output = fuse.search(query);
     console.log(output);
+}
+
+// will be used to fill up the DOM
+// todo just gonna use one JSON (sounds.json)
+function loadInfo() {
+    const dataInfo = Promise.resolve(getCategory());
+    dataInfo.then((dataInfo => {
+
+    }))
 }

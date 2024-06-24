@@ -1,5 +1,9 @@
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import puppeteer from 'puppeteer';
+import fs from 'fs';
+
+//  sounds.json has more items than cateogory.json
 
 const firebaseConfig = {
     apiKey: "AIzaSyA77HYtVdsJD_SdwDgdVWvGDeDA1IIquKY",
@@ -15,57 +19,91 @@ initializeApp(firebaseConfig);
 
 const storage = getStorage();
 const categoryRef = ref(storage, 'category.json');
-const testCatRef = ref(storage, 'testCat.json');
-async function getCategory() {
-    const text_url = await getDownloadURL(categoryRef);
-    const response = await fetch(text_url, { mode: 'cors' });
-    let text = await response.text();
-    text = JSON.parse(text);
-    return text; // returns an array of the JSON data
-}
+const benImg = ref(storage, 'images/ben.webp');
+const imgFolder = benImg.parent;
 
-import Scraper from 'images-scraper';
-import puppeteer from 'puppeteer';
+// will update the URLS to images (in the JSON array) from database
+async function updateURLS() {
+    let data = JSON.parse(fs.readFileSync('sounds.json', 'utf8'));
+    let length = data.length;
+    let current;
+    for (let i = 0; i < length; i++) {
+        current = data[i];
+        const currentRef = ref(storage, `images/${current.id}.webp`);
+        data[i].url = await getDownloadURL(currentRef);
 
-async function getLink() {
-    const browser = await puppeteer.launch({ headless: true });
-    const google = new Scraper({
-        puppeteer: {
-            browser: browser,
-        },
-        safe: false // not in safe search 😈
-    });
-
-    let queries = ['python', 'javascript', 'java'];
-
-    let results = [];
-    for (const query of queries) {
-        try {
-            const result = await google.scrape(query, 1);
-            results.push({ query, images: result });
-        } catch (error) {
-            console.error(`Error fetching images for ${query}:`, error);
-            results.push({ query, images: [] });
-        }
+        console.log(i + 1, " / ", length);
     }
 
-    await browser.close();
-    console.log('results', results);
+    // console.log('\nDONE');
+
+    data = JSON.stringify(data);
+
+    fs.writeFile('sounds.json', data, (err) => {
+        if (err) throw err;
+    })
 }
 
-getLink();
+updateURLS();
 
-
-function getImages() {
-    const dataPromise = Promise.resolve(getCategory());
-
-    dataPromise.then((dataPromise) => {
-        let data = JSON.parse(JSON.stringify(dataPromise))
-        let length = data.length
-        console.log(data[length - 3].id);
-        console.log(data[length - 2].id);
-        console.log(data[length - 1].id);
-    });
+// ! for text only
+async function getRef_text(refItem) {
+    const url = await getDownloadURL(refItem);
+    const response = await fetch(url, { mode: 'cors' });
+    let data = await response.text();
+    data = JSON.parse(data);
+    return data;
 }
 
-// getImages();
+// ! get the links from images
+const url = await getDownloadURL(benImg);
+
+
+// todo: add select new image option
+async function imgScrape(queries) {
+    try {
+        const browser = await puppeteer.launch({ headless: true });
+        const page = await browser.newPage();
+        const NUMBER_OF_IMAGES = 3;
+        var images;
+        for (const query of queries) {
+            await page.goto(`https://www.google.com/search?tbm=isch&q=${query}`);
+
+            // Scroll to the bottom of the page to load more images
+            await page.evaluate(async () => {
+                for (let i = 0; i < 10; i++) {
+                    window.scrollBy(0, window.innerHeight);
+                    await new Promise(resolve => setTimeout(resolve, 500)); // Wait for more images to load
+                }
+            });
+
+            // Wait for images to be loaded
+            await page.waitForSelector('img');
+
+            // Extract image URLs
+            images = await page.evaluate(() => {
+                const imageElements = document.querySelectorAll('img');
+                const urls = [];
+                imageElements.forEach(img => {
+                    const url = img.src;
+                    if (url.startsWith('http') && !url.includes('google')) {
+                        urls.push(url);
+                    }
+                });
+                return urls.slice(0, NUMBER_OF_IMAGES);
+            });
+        }
+
+        await browser.close();
+        return images;
+
+    } catch (err) {
+        console.error('An error occurred:', err);
+    }
+}
+
+// const urls = Promise.resolve(imgScrape(['python programming language logo']));
+
+// urls.then((urls) => {
+//     console.log(urls);
+// })
