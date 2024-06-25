@@ -2,8 +2,6 @@ import { initializeApp } from "firebase/app";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import puppeteer from 'puppeteer';
 import fs from 'fs';
-import { json } from "express";
-import { join } from "path";
 
 //  sounds.json has more items than cateogory.json
 
@@ -20,7 +18,19 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 
 const storage = getStorage();
-const categoryRef = ref(storage, 'category.json');
+
+// for text only
+// ? (backend)
+async function getRef(refItem) {
+    const url = await getDownloadURL(refItem);
+    const response = await fetch(url, { mode: 'cors' });
+    let data = await response.text();
+    data = JSON.parse(data);
+    return data;
+}
+
+// get the links from images
+// ? (backend)
 const benImg = ref(storage, 'images/ben.webp');
 const url = await getDownloadURL(benImg);
 
@@ -52,18 +62,42 @@ async function updateURLS() {
 
 // updateURLS();
 
-// ! for text only
-async function getRef_text(refItem) {
-    const url = await getDownloadURL(refItem);
-    const response = await fetch(url, { mode: 'cors' });
-    let data = await response.text();
-    data = JSON.parse(data);
-    return data;
+// ? (backend)
+async function updateCategories() {
+    const soundsRef = ref(storage, 'sounds.json');
+    const catPromise = Promise.resolve(getRef(soundsRef));
+    catPromise.then((catPromise) => {
+        let categories = catPromise;
+        let length = categories.length;
+
+        var cats_arr = [];
+        var sorted = [];
+        var current;
+        for (let i = 0; i < length; i++) {
+            current = categories[i].category;
+            if (!cats_arr.includes(current)) {
+                cats_arr.push(current);
+                sorted.push([]);
+            }
+            let index = cats_arr.indexOf(current);
+            sorted[index].push(categories[i]);
+        }
+
+        let cats_json = {};
+        for (let i = 0; i < cats_arr.length; i++) {
+            cats_json[`${cats_arr[i]}`] = sorted[i];
+        }
+
+        cats_json = JSON.stringify(cats_json);
+
+        fs.writeFile('category.json', cats_json, (err) => {
+            if (err) throw err;
+        })
+
+    });
 }
 
-// ! get the links from images
-const url = await getDownloadURL(benImg);
-
+updateCategories();
 
 // todo: add select new image option
 async function imgScrape(queries) {
