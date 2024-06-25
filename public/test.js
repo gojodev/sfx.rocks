@@ -1,23 +1,22 @@
-let data = [{
-    "name": "Vine Boom",
-    "id": "vine-boom",
-    "category": "Social Media"
-},
-{
-    "name": "Metal Pipe",
-    "id": "metal-pipe",
-    "category": "Sounds"
-},
-{
-    "name": "Goofy Car Horn",
-    "id": "car-horn",
-    "category": "Goofy"
-}]
+let arr = [
+    'Social Media', 'Sounds',
+    'Goofy', 'Among Us',
+    'Games', 'Shows',
+    'Minecraft', 'People',
+    'Annoying', 'Undertale',
+    'Fortnite'
+];
 
-let test = data[0];
+// console.log(arr.indexOf('Goofy'));
 
-test.url = 'some url';
+let word = 'Goofy';
 
-data[0] = test;
+word = word.charAt(0).toUpperCase() + word.slice(1);
+// console.log(word)
 
-console.log(data);
+import fs from 'fs';
+
+let data = JSON.parse(fs.readFileSync('sounds.json', 'utf8'));
+
+// console.log(data[data.length - 1]);
+console.log(data.length);
