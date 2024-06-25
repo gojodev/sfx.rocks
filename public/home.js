@@ -28,8 +28,7 @@ gojodev()
 // ! global ------------------------------------------------
 const storage = getStorage();
 const categoryRef = ref(storage, 'category.json');
-const testCatRef = ref(storage, 'testCat.json');
-async function getCategory() {
+async function getRef() {
     const text_url = await getDownloadURL(categoryRef);
     const response = await fetch(text_url, { mode: 'cors' });
     let text = await response.text();
@@ -52,7 +51,7 @@ function search(query) {
 // will be used to fill up the DOM
 // todo just gonna use one JSON (sounds.json)
 function loadInfo() {
-    const dataInfo = Promise.resolve(getCategory());
+    const dataInfo = Promise.resolve(getRef());
     dataInfo.then((dataInfo => {
 
     }))
