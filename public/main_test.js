@@ -2,8 +2,6 @@ import { initializeApp } from "firebase/app";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import puppeteer from 'puppeteer';
 import fs from 'fs';
-import { json } from "express";
-import { join } from "path";
 
 //  sounds.json has more items than cateogory.json
 
@@ -21,7 +19,8 @@ initializeApp(firebaseConfig);
 
 const storage = getStorage();
 
-// ! for text only
+// for text only
+// ? (backend)
 async function getRef(refItem) {
     const url = await getDownloadURL(refItem);
     const response = await fetch(url, { mode: 'cors' });
@@ -30,7 +29,8 @@ async function getRef(refItem) {
     return data;
 }
 
-// ! get the links from images
+// get the links from images
+// ? (backend)
 const benImg = ref(storage, 'images/ben.webp');
 const url = await getDownloadURL(benImg);
 
@@ -62,6 +62,7 @@ async function updateURLS() {
 
 // updateURLS();
 
+// ? (backend)
 async function updateCategories() {
     const soundsRef = ref(storage, 'sounds.json');
     const catPromise = Promise.resolve(getRef(soundsRef));
