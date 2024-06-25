@@ -1,5 +1,20 @@
-import { config } from "./config.js";
+import { initializeApp } from "firebase/app";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import Fuse from 'fuse.js';
+
+function config() {
+    const firebaseConfig = {
+        apiKey: "AIzaSyA77HYtVdsJD_SdwDgdVWvGDeDA1IIquKY",
+        authDomain: "sfx-rocks.firebaseapp.com",
+        projectId: "sfx-rocks",
+        storageBucket: "sfx-rocks.appspot.com",
+        messagingSenderId: "221320269920",
+        appId: "1:221320269920:web:0804ed9dfe08c466677305",
+        measurementId: "G-V506HKS3NE"
+    };
+
+    initializeApp(firebaseConfig);
+}
 
 config();
 
@@ -27,17 +42,15 @@ gojodev()
 
 // ! global ------------------------------------------------
 const storage = getStorage();
-const categoryRef = ref(storage, 'category.json');
-async function getRef() {
-    const text_url = await getDownloadURL(categoryRef);
-    const response = await fetch(text_url, { mode: 'cors' });
-    let text = await response.text();
-    text = JSON.parse(text);
-    return text; // returns an array of the JSON data
+async function getRef(refItem) {
+    const url = await getDownloadURL(refItem);
+    const response = await fetch(url, { mode: 'cors' });
+    let data = await response.text();
+    data = JSON.parse(data);
+    return data;
 }
 
 function search(query) {
-    let Fuse = require("fuse.js");
 
     let all_sounds = []
     let fuse = new Fuse(all_sounds, {
@@ -51,8 +64,19 @@ function search(query) {
 // will be used to fill up the DOM
 // todo just gonna use one JSON (sounds.json)
 function loadInfo() {
-    const dataInfo = Promise.resolve(getRef());
-    dataInfo.then((dataInfo => {
+    const categoryRef = ref(storage, 'category.json');
+    const soundsRef = ref(storage, 'sounds.json');
+    const catInfo = Promise.resolve(getRef(categoryRef));
+    catInfo.then((catInfo => {
+        console.log(catInfo);
+    }))
+
+    const soundInfo = Promise.resolve(getRef(categoryRef));
+    soundInfo.then((soundInfo => {
 
     }))
 }
+
+loadInfo();
+
+console.log('helloworld')

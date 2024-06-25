@@ -35,6 +35,7 @@ const benImg = ref(storage, 'images/ben.webp');
 const url = await getDownloadURL(benImg);
 
 // will update the URLS to images (in the JSON array) from database
+// ? (backend)
 async function updateURLS() {
     let data = JSON.parse(fs.readFileSync('sounds.json', 'utf8'));
     let length = data.length;
@@ -97,7 +98,7 @@ async function updateCategories() {
     });
 }
 
-updateCategories();
+// updateCategories();
 
 // todo: add select new image option
 async function imgScrape(queries) {
