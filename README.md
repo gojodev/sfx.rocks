@@ -10,7 +10,7 @@ sfx.rocks
 ├─ public
 │  ├─ 404.html
 │  ├─ bundle.js
-│  ├─ category.json
+│  ├─ category_array.txt
 │  ├─ home.js
 │  ├─ images
 │  │  ├─ emmanuel.webp

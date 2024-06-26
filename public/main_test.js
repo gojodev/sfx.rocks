@@ -42,7 +42,6 @@ function capitalise(word) {
 // ? (backend)
 async function updateURLS() {
     let data = JSON.parse(fs.readFileSync('sounds.json', 'utf8'));
-    let length = data.length;
     let counter = 0;
     for (const cat_key in data) {
         let cat = data[cat_key];
@@ -70,11 +69,9 @@ async function updateURLS() {
     })
 }
 
-// updateURLS();
-
 // ? (backend)
 async function updateCategories() {
-    // updateURLS();
+    updateURLS();
     const soundsRef = ref(storage, 'sounds.json');
     const soundPromise = Promise.resolve(getRef_json(soundsRef));
 
@@ -114,7 +111,7 @@ async function updateCategories() {
     });
 }
 
-updateCategories();
+// updateCategories();
 
 // todo: add select new image option
 async function imgScrape(queries) {

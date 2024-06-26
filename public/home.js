@@ -72,7 +72,7 @@ async function loadInfo() {
     const soundsRef = ref(storage, 'sounds.json');
     const catArrRef = ref(storage, 'category_array.txt'); // array of category names
 
-    let [catArr, catJson, soundsJson] = await Promise.allSettled([getRef_text(catArrRef), getRef_json(soundsRef)]);
+    let [catArr, soundsJson] = await Promise.allSettled([getRef_text(catArrRef), getRef_json(soundsRef)]);
     // todo sort alphabeti later
     catArr = catArr.value.split(',');
     soundsJson = soundsJson.value;
