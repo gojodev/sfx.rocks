@@ -152,14 +152,6 @@ body {
     background-color: var(--black);
 }
 
-#main {
-    width: 80%;
-    margin: auto;
-    text-align: center;
-    padding: 50px;
-    border-radius: 20px;
-}
-
 .footer {
     text-align: center;
     background-color: var(--accent);
@@ -237,4 +229,31 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+
+.item-container {
+    margin: 5px;
+    display: inline-block;
+}
+
+.cat-items-container {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding: 50px;
+    border-radius: 20px;
+}
+
+.img-style {
+    width: 100px;
+    border: 3px solid var(--white);
+    transition: 0.1s;
+}
+
+.img-style:hover {
+    transform: scale(1.07);
+}
+
+.img-desc {
+    color: var(--white);
 }

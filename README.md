@@ -11,14 +11,12 @@ sfx.rocks
 │  ├─ 404.html
 │  ├─ bundle.js
 │  ├─ category.json
-│  ├─ config.js
 │  ├─ home.js
 │  ├─ images
 │  │  ├─ emmanuel.webp
 │  │  ├─ favicon.ico
 │  │  ├─ gojodev.webp
-│  │  ├─ logo.webp
-│  │  └─ memes
+│  │  └─ logo.webp
 │  ├─ index.html
 │  ├─ main_test.js
 │  ├─ sounds.json

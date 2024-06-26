@@ -2,6 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import puppeteer from 'puppeteer';
 import fs from 'fs';
+import { count } from "console";
 
 //  sounds.json has more items than cateogory.json
 
@@ -19,9 +20,8 @@ initializeApp(firebaseConfig);
 
 const storage = getStorage();
 
-// for text only
 // ? (backend)
-async function getRef(refItem) {
+async function getRef_json(refItem) {
     const url = await getDownloadURL(refItem);
     const response = await fetch(url, { mode: 'cors' });
     let data = await response.text();
@@ -34,24 +34,33 @@ async function getRef(refItem) {
 const benImg = ref(storage, 'images/ben.webp');
 const url = await getDownloadURL(benImg);
 
+function capitalise(word) {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+}
+
 // will update the URLS to images (in the JSON array) from database
 // ? (backend)
 async function updateURLS() {
     let data = JSON.parse(fs.readFileSync('sounds.json', 'utf8'));
     let length = data.length;
-    let current;
-    for (let i = 0; i < length; i++) {
-        current = data[i];
-        data[i].category = current.category.charAt(0).toUpperCase() + current.category.slice(1);
+    let counter = 0;
+    for (const cat_key in data) {
+        let cat = data[cat_key];
+        for (const item_key in cat) {
+            data[cat_key][item_key].category = capitalise(data[cat_key][item_key].category);
+            data[cat_key][item_key].name = capitalise(data[cat_key][item_key].name);
 
-        const imgRef = ref(storage, `images/${current.id}.webp`);
-        const soundRef = ref(storage, `images/${current.id}.webp`);
+            const imgRef = ref(storage, `images/${data[cat_key][item_key].id}.webp`);
+            const soundRef = ref(storage, `sounds/${data[cat_key][item_key].id}.webm`);
 
-        data[i].img_url = await getDownloadURL(imgRef);
-        data[i].sound_url = await getDownloadURL(soundRef);
+            data[cat_key][item_key].img_url = await getDownloadURL(imgRef);
+            data[cat_key][item_key].sound_url = await getDownloadURL(soundRef);
 
-        console.log(i + 1, " / ", length);
+            counter++;
+            console.log(counter, " / ", 78);
+        }
     }
+
 
     data = JSON.stringify(data);
 
@@ -65,23 +74,29 @@ async function updateURLS() {
 
 // ? (backend)
 async function updateCategories() {
+    // updateURLS();
     const soundsRef = ref(storage, 'sounds.json');
-    const catPromise = Promise.resolve(getRef(soundsRef));
-    catPromise.then((catPromise) => {
-        let categories = catPromise;
-        let length = categories.length;
+    const soundPromise = Promise.resolve(getRef_json(soundsRef));
+
+    soundPromise.then((catPromise) => {
+        let data = catPromise;
 
         var cats_arr = [];
         var sorted = [];
         var current;
-        for (let i = 0; i < length; i++) {
-            current = categories[i].category;
-            if (!cats_arr.includes(current)) {
-                cats_arr.push(current);
-                sorted.push([]);
+
+        for (const cat_key in data) {
+            let cat = data[cat_key];
+            for (const item_key in cat) {
+                current = data[cat_key][item_key].category;
+
+                if (!cats_arr.includes(current)) {
+                    cats_arr.push(current);
+                    sorted.push([]);
+                }
+                let index = cats_arr.indexOf(current);
+                sorted[index].push(data[cat_key][item_key]);
             }
-            let index = cats_arr.indexOf(current);
-            sorted[index].push(categories[i]);
         }
 
         let cats_json = {};
@@ -89,16 +104,17 @@ async function updateCategories() {
             cats_json[`${cats_arr[i]}`] = sorted[i];
         }
 
-        cats_json = JSON.stringify(cats_json);
-
-        fs.writeFile('category.json', cats_json, (err) => {
+        fs.writeFile('sounds.json', JSON.stringify(cats_json), (err) => {
             if (err) throw err;
         })
 
+        fs.writeFile('category_array.txt', cats_arr.toString(), (err) => {
+            if (err) throw err;
+        })
     });
 }
 
-// updateCategories();
+updateCategories();
 
 // todo: add select new image option
 async function imgScrape(queries) {
