@@ -258,6 +258,7 @@ input::-webkit-inner-spin-button {
 .img-style {
     width: 100px;
     height: 100px;
+    display: block;
 
     object-fit: cover;
     object-position: center;
@@ -269,13 +270,11 @@ input::-webkit-inner-spin-button {
     transform: scale(1.07);
 }
 
-.img-style:active {
-    border: 3px solid var(--accent);
-}
-
 .img-desc {
     display: block;
     color: var(--white);
+    width: 100px;
+    height: 100px;
 }
 
 .cat-header {
@@ -289,4 +288,109 @@ input::-webkit-inner-spin-button {
 
 i {
     color: var(--accent);
+}
+
+.general_background {
+    background-color: var(--black);
+    padding: 15px;
+    color: var(--white);
+    border-radius: 20px;
+    margin: 10px;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#emmanuel {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 5px solid var(--white);
+    transition: 0.2s;
+
+    object-fit: cover;
+    object-position: center;
+}
+
+#emmanuel:hover {
+    transform: scale(1.05);
+}
+
+#emmanuel-container {
+    text-align: center;
+    margin-top: 20px;
+    color: var(--black);
+}
+
+.fadeIn {
+    animation: fadeInAni;
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+}
+
+@keyframes fadeInAni {
+    from {
+        opacity: 0;
+        transform: translate(0, -15px);
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+#founder-name {
+    margin-top: 10px;
+}
+
+#founder-text {
+    color: var(--accent);
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+.footer-icons-support {
+    color: var(--black);
+    margin: 10px;
+    transition: 0.2s;
+}
+
+.footer-icons-support:hover {
+    background-image: linear-gradient(45deg, yellow, #af4261);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transform: scale(1.2);
+}
+
+.footer {
+    text-align: center;
+    background-color: var(--accent);
+    color: var(--black);
+    font-size: 14px;
+    padding: 10px;
+    width: 30%;
+    border-radius: 20px;
+    margin: auto;
+    transition: 0.2s;
+}
+
+.footer:hover {
+    font-size: 16px;
+    color: var(--white);
+    background-color: var(--black);
+    transition: 0.2s;
+}
+
+/* Desktop */
+@media only screen and (min-width: 768px) {
+    .logo-container {
+        width: auto;
+        align-items: center;
+        text-align: center;
+    }
+
+    #self_info {
+        width: 70%;
+        margin: auto;
+        border-radius: 10px;
+    }
 }

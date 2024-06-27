@@ -38,7 +38,7 @@ function gojodev() {
     }, 3500)
 }
 
-// gojodev()
+gojodev()
 
 
 const storage = getStorage(); // ! global
@@ -72,15 +72,15 @@ async function loadInfo() {
     const soundsRef = ref(storage, 'sounds.json');
     const catArrRef = ref(storage, 'category_array.txt'); // array of category names
 
-    let [catArr, soundsJson] = await Promise.allSettled([getRef_text(catArrRef), getRef_json(soundsRef)]);
-    catArr = catArr.value.split(',');
-    soundsJson = soundsJson.value;
+    var [catArr, soundsJson] = await Promise.allSettled([getRef_text(catArrRef), getRef_json(soundsRef)]);
+    var catArr = catArr.value.split(',');
+    var soundsJson = soundsJson.value;
 
-    let name;
-    let id;
-    let category;
-    let img_url;
-    let sound_url;
+    var name;
+    var id;
+    var category;
+    var img_url;
+    var sound_url;
 
     var header_container
     var items_container;
@@ -102,6 +102,7 @@ async function loadInfo() {
             id = cat[item_key].id;
             category = cat[item_key].category;
             img_url = cat[item_key].img_url;
+            // ? dunno why this is only the last one
             sound_url = cat[item_key].sound_url;
 
             const item = document.createElement("span");
@@ -109,17 +110,23 @@ async function loadInfo() {
             const img = document.createElement("img");
             img.classList.add('img-style');
             img.src = img_url;
+            img.id = id;
             item.appendChild(img);
 
             const img_desc = document.createElement('h3');
             const img_desc_node = document.createTextNode(name);
             img_desc.appendChild(img_desc_node);
             item.appendChild(img_desc);
+
+            img.addEventListener('click', () => {
+                // the sound_url variable wasn't working for some reason
+                var audio = new Audio(`${cat[item_key].sound_url}`);
+                audio.play();
+            });
+
             items_container.appendChild(item);
-            console.log(items_container)
         }
         header_container.appendChild(items_container);
-
     }
 }
 
