@@ -73,33 +73,53 @@ async function loadInfo() {
     const catArrRef = ref(storage, 'category_array.txt'); // array of category names
 
     let [catArr, soundsJson] = await Promise.allSettled([getRef_text(catArrRef), getRef_json(soundsRef)]);
-    // todo sort alphabeti later
     catArr = catArr.value.split(',');
     soundsJson = soundsJson.value;
-    // console.log(catArr);
-    // console.log(soundJson);
 
     let name;
     let id;
     let category;
     let img_url;
     let sound_url;
-    for (const cat_key in catJson) {
-        let cat = catJson[cat_key];
-        console.log(cat_key);
+
+    var header_container
+    var items_container;
+    for (const cat_key in soundsJson) {
+        let cat = soundsJson[cat_key];
+        const div_header = document.createElement("div");
+        const div_node = document.createTextNode(cat_key);
+        div_header.appendChild(div_node);
+
+        div_header.classList.add('cat-header', 'black-bg', 'white', 'box-shadow')
+        header_container = document.getElementById('cat_header_container');
+        header_container.appendChild(div_header);
+
+        items_container = document.createElement("div");
+        items_container.classList.add('black-bg', 'white', 'box-shadow', 'item-container');
+
         for (const item_key in cat) {
             name = cat[item_key].name;
             id = cat[item_key].id;
             category = cat[item_key].category;
             img_url = cat[item_key].img_url;
             sound_url = cat[item_key].sound_url;
-            // const div = document.createElement("div");
-            // const div_node = document.createTextNode(`Name: ${catJson[key].name}`);
-            // div.appendChild(div_node);
 
-            // const img = document.createElement("img");
-            // const img_node = document.createTextNode()
+            const item = document.createElement("span");
+            item.classList.toggle('item');
+            const img = document.createElement("img");
+            img.classList.add('img-style');
+            img.src = img_url;
+            item.appendChild(img);
+
+            const img_desc = document.createElement('h3');
+            const img_desc_node = document.createTextNode(name);
+            img_desc.appendChild(img_desc_node);
+            item.appendChild(img_desc);
+            items_container.appendChild(item);
+            console.log(items_container)
         }
+        header_container.appendChild(items_container);
+
     }
 }
 

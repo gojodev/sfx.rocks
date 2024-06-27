@@ -2,7 +2,6 @@ import { initializeApp } from "firebase/app";
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import puppeteer from 'puppeteer';
 import fs from 'fs';
-import { count } from "console";
 
 //  sounds.json has more items than cateogory.json
 
