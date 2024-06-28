@@ -237,21 +237,24 @@ input::-webkit-inner-spin-button {
 
 .item-container {
     width: 80%;
-    margin: auto auto 30px auto;
-    text-align: center;
+    margin: auto auto 10px auto;
     padding: 50px;
     border-radius: 20px;
+
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-direction: row;
     flex-wrap: wrap;
 }
 
 .item {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    width: 150px;
-    height: 150px;
+    justify-content: center;
+    flex-direction: column;
+
+    width: 140px;
     margin: 10px;
 }
 
@@ -261,8 +264,6 @@ input::-webkit-inner-spin-button {
     display: block;
 
     object-fit: cover;
-    object-position: center;
-    /* border: 3px solid var(--white); */
     transition: 0.1s;
 }
 
@@ -273,13 +274,11 @@ input::-webkit-inner-spin-button {
 .img-desc {
     display: block;
     color: var(--white);
-    width: 100px;
-    height: 100px;
 }
 
 .cat-header {
     padding: 10px;
-    width: 500px;
+    width: 50%;
     border-radius: 20px;
     margin: auto auto 30px auto;
     text-align: center;
