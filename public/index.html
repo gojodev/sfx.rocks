@@ -26,16 +26,17 @@
   <!-- Open Graph Meta Tags -->
   <meta property="og:title" content="GojoDev">
   <meta property="og:description"
-    content="Explore projects by Emmanuel Koledoye, a 3rd-year software development student. Check out helpful websites and programming scripts.">
-  <meta property="og:image" content="https://sfx.rocks/images/gojodev.webp">
-  <meta property="og:url" content="https://sfx.rocks.com">
+    content="Explore projects by Emmanuel Koledoye, a software developer. Check out helpful websites and programming scripts.">
+  <meta property="og:image" content="https://sfx-rocks.web.app/images/gojodev.webp">
+  <meta property="og:url" content="https://sfx-rocks.web.app">
   <!-- Open Graph Meta Tags End -->
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="canonical" href="https://sfx.rocks">
+  <link rel="canonical" href="https://sfx-rocks.web.app">
   <title>Sfx.rocks - Home</title>
 
+  <script src="theme.js"></script>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
 
@@ -60,7 +61,7 @@
   <div class="header title fadeIn">
     <div class="logo-container">
       <div id="img-float">
-        <a href="https://gojodev.com" alt="gojodev home page" target="_blank">
+        <a href="https://gojodev.com" aria-label="gojodev home page" target="_blank" rel="noopener noreferrer">
           <img src="images/logo.webp" alt="sfx rocks Logo" class="logo" id="gojodev">
         </a>
       </div>
@@ -72,35 +73,43 @@
           </div>
         </a>
 
-        <br>
-
         <a href="about.html">
           <div class="nav-link special-background pulseAnimation box-shadow">
             <h3>About</h3>
           </div>
         </a>
+
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"></circle>
+            <line x1="12" y1="2" x2="12" y2="4"></line>
+            <line x1="12" y1="20" x2="12" y2="22"></line>
+            <line x1="4.93" y1="4.93" x2="6.34" y2="6.34"></line>
+            <line x1="17.66" y1="17.66" x2="19.07" y2="19.07"></line>
+            <line x1="2" y1="12" x2="4" y2="12"></line>
+            <line x1="20" y1="12" x2="22" y2="12"></line>
+            <line x1="4.93" y1="19.07" x2="6.34" y2="17.66"></line>
+            <line x1="17.66" y1="6.34" x2="19.07" y2="4.93"></line>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
       </div>
     </div>
   </div>
 
-  <!-- <div class="search-bar">
-    <label for="target_text"></label>
-    <input type="text" id="target_text" class="box-shadow" placeholder="vine boom">
+  <div class="search-bar">
+    <div class="search-bar-inner">
+      <label for="target_text" class="sr-only">Search sounds</label>
+      <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+      <input type="text" id="target_text" class="box-shadow" placeholder="Search for a sound&hellip;" autocomplete="off">
+    </div>
+  </div>
+  <p id="no-results">No sounds match your search.</p>
 
-    <i class="fas fa-search left"></i>
-  </div> -->
-
-  <br>
   <div id="cat_header_container">
   </div>
-
-  <!-- <div class="black-bg white box-shadow item-container">
-    <span class="item">
-      <img class="img-style"
-        src="https://firebasestorage.googleapis.com/v0/b/sfx-rocks.appspot.com/o/images%2Fvine-boom.webp?alt=media&token=bf77465e-3a92-48c0-845e-c48a53378a2b">
-      <h3 class="img-desc"> Vine Boom </h3>
-    </span>
-  </div> -->
 
   <br>
   <footer class="footer box-shadow">

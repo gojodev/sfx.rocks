@@ -16,7 +16,7 @@ word = word.charAt(0).toUpperCase() + word.slice(1);
 
 import fs from 'fs';
 
-let data = JSON.parse(fs.readFileSync('sounds.json', 'utf8'));
+let data = JSON.parse(fs.readFileSync('../public/sounds.json', 'utf8'));
 
 // console.log(data[data.length - 1]);
 console.log(data.length);

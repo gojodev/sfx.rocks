@@ -1,6 +1,8 @@
 
 ```
 sfx.rocks
+├─ .firebase
+│  └─ hosting.cHVibGlj.cache
 ├─ .firebaserc
 ├─ cors.json
 ├─ esbuild.config.js
@@ -9,6 +11,8 @@ sfx.rocks
 ├─ package.json
 ├─ public
 │  ├─ 404.html
+│  ├─ about.html
+│  ├─ about.js
 │  ├─ bundle.js
 │  ├─ category_array.txt
 │  ├─ home.js
@@ -18,10 +22,13 @@ sfx.rocks
 │  │  ├─ gojodev.webp
 │  │  └─ logo.webp
 │  ├─ index.html
-│  ├─ main_test.js
 │  ├─ sounds.json
-│  ├─ style.css
-│  └─ test.js
-└─ README.md
+│  └─ style.css
+├─ README.md
+└─ scripts
+   ├─ main_test.js
+   ├─ screenshot.mjs
+   ├─ screenshot2.mjs
+   └─ test.js
 
 ```

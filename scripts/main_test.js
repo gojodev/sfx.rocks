@@ -40,7 +40,7 @@ function capitalise(word) {
 // will update the URLS to images (in the JSON array) from database
 // ? (backend)
 async function updateURLS() {
-    let data = JSON.parse(fs.readFileSync('sounds.json', 'utf8'));
+    let data = JSON.parse(fs.readFileSync('../public/sounds.json', 'utf8'));
     let counter = 0;
     for (const cat_key in data) {
         let cat = data[cat_key];
@@ -100,11 +100,11 @@ async function updateCategories() {
             cats_json[`${cats_arr[i]}`] = sorted[i];
         }
 
-        fs.writeFile('sounds.json', JSON.stringify(cats_json), (err) => {
+        fs.writeFile('../public/sounds.json', JSON.stringify(cats_json), (err) => {
             if (err) throw err;
         })
 
-        fs.writeFile('category_array.txt', cats_arr.toString(), (err) => {
+        fs.writeFile('../public/category_array.txt', cats_arr.toString(), (err) => {
             if (err) throw err;
         })
     });
